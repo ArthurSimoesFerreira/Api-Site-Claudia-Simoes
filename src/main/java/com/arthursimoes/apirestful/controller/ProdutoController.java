@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -58,14 +59,21 @@ public class ProdutoController {
     public ResultadoPaginado<Produto> recuperarProdutosComPaginacao(
             @RequestParam(value = "pagina", defaultValue = "0") int pagina,
             @RequestParam(value = "tamanho", defaultValue = "3") int tamanho,
-            @RequestParam(value = "nome", defaultValue = "") String nome) {
-        Pageable pageable = PageRequest.of(pagina, tamanho);
+            @RequestParam(value = "nome", defaultValue = "") String nome,
+            @RequestParam(value = "ordenacaoCampo", defaultValue = "nome") String ordenacaoCampo,
+            @RequestParam(value = "ordenacaoDirecao", defaultValue = "asc") String ordenacaoDirecao) {
+
+        Sort sort = ordenacaoDirecao.equalsIgnoreCase("asc") ? Sort.by(ordenacaoCampo).ascending() : Sort.by(ordenacaoCampo).descending();
+        Pageable pageable = PageRequest.of(pagina, tamanho, sort);
+        System.out.println(pageable);
         Page<Produto> page = produtoService.recuperarProdutosComPaginacao(nome, pageable);
+        System.out.println(page);
         ResultadoPaginado<Produto> resultadoPaginado = new ResultadoPaginado<>(
                 page.getTotalElements(),
                 page.getTotalPages(),
                 page.getNumber(),
                 page.getContent());
+        System.out.println(resultadoPaginado.itens());
         return resultadoPaginado;
     }
 }
