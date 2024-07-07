@@ -1,9 +1,11 @@
 package com.arthursimoes.apirestful;
 
 import com.arthursimoes.apirestful.model.Categoria;
+import com.arthursimoes.apirestful.model.Usuario;
 import com.arthursimoes.apirestful.repository.ProdutoRepository;
 import com.arthursimoes.apirestful.model.Produto;
 import com.arthursimoes.apirestful.repository.CategoriaRepository;
+import com.arthursimoes.apirestful.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,12 +23,18 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ApiResTfulV1Application.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
+
+		Usuario usuario = new Usuario("admin", "12345");
+		usuarioRepository.save(usuario);
 
 		Categoria camisa = new Categoria("Camisa");
 		categoriaRepository.save(camisa);
