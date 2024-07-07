@@ -15,6 +15,8 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     List<Produto> findByCategoriaId(Long idCategoria);
 
+    Optional<Produto> findById(Long id);
+
     @Query("select p from Produto p " +
            "left outer join fetch p.categoria " +
            "order by p.id")
@@ -39,4 +41,5 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
             "left outer join fetch p.categoria " +
             "where p.id = :id")
     Optional<Produto> recuperarProdutoPorId(Long id);
+
 }

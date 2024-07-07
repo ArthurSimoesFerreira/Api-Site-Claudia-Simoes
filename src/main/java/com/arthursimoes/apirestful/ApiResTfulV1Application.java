@@ -43,7 +43,7 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 				"Top de ginástica branco",
 				true,
 				100,
-				BigDecimal.valueOf(2.45),
+				BigDecimal.valueOf(129.99),
 				LocalDate.of(2023, 4, 26),
 				top);
 		produtoRepository.save(produto);
@@ -54,7 +54,7 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 				"Top de ginástica cinza",
 				true,
 				500,
-				BigDecimal.valueOf(1.1),
+				BigDecimal.valueOf(139.99),
 				LocalDate.of(2023, 5, 22),
 				top);
 		produtoRepository.save(produto);
@@ -65,7 +65,7 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 				"Top de ginástica preto",
 				true,
 				400,
-				BigDecimal.valueOf(4.7),
+				BigDecimal.valueOf(99.99),
 				LocalDate.of(2023, 3, 24),
 				top);
 		produtoRepository.save(produto);
@@ -76,7 +76,7 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 				"Top de ginástica rosa",
 				true,
 				120,
-				BigDecimal.valueOf(4.99),
+				BigDecimal.valueOf(149.99),
 				LocalDate.of(2023, 3, 12),
 				top);
 		produtoRepository.save(produto);
@@ -87,7 +87,7 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 				"Legging de ginástica azul",
 				true,
 				340,
-				BigDecimal.valueOf(2.5),
+				BigDecimal.valueOf(200.00),
 				LocalDate.of(2023, 5, 17),
 				legging);
 		produtoRepository.save(produto);
@@ -98,7 +98,7 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 				"Legging de ginástica cinza",
 				true,
 				220,
-				BigDecimal.valueOf(4.99),
+				BigDecimal.valueOf(189.99),
 				LocalDate.of(2023, 5, 14),
 				legging);
 		produtoRepository.save(produto);
@@ -109,7 +109,7 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 				"Legging de ginástica preta",
 				true,
 				350,
-				BigDecimal.valueOf(1.05),
+				BigDecimal.valueOf(139.99),
 				LocalDate.of(2023, 2, 22),
 				legging);
 		produtoRepository.save(produto);
@@ -120,7 +120,7 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 				"Camisa de ginástica branca",
 				true,
 				720,
-				BigDecimal.valueOf(1.85),
+				BigDecimal.valueOf(69.90),
 				LocalDate.of(2023, 2, 23),
 				camisa);
 		produtoRepository.save(produto);
@@ -131,7 +131,7 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 				"Camisa de manga comprida com tecido respirável",
 				true,
 				600,
-				BigDecimal.valueOf(5.39),
+				BigDecimal.valueOf(59.99),
 				LocalDate.of(2023, 3, 28),
 				camisa);
 		produtoRepository.save(produto);

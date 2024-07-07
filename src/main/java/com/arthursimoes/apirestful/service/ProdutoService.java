@@ -81,4 +81,10 @@ public class ProdutoService {
     public Page<Produto> recuperarProdutosComPaginacao(String nome, Pageable pageable) {
         return produtoRepository.recuperarProdutosComPaginacao(nome, pageable);
     }
+
+    public Produto recuperarProdutoPorId(Long id) {
+        return produtoRepository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Produto número " + id + " não encontrado."));
+    }
+
 }

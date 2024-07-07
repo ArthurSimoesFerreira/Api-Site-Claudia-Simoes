@@ -27,6 +27,12 @@ public class ProdutoController {
         return produtoService.recuperarProdutos();
     }
 
+    @GetMapping("{id}")   // http://localhost:8080/produtos/1
+    public ResponseEntity<Produto> recuperarProdutoPorId(@PathVariable("id") Long id) {
+        Produto produto = produtoService.recuperarProdutoPorId(id);
+        return ResponseEntity.ok(produto);
+    }
+
     @PostMapping   // http://localhost:8080/produtos
     public Produto cadastrarProduto(@RequestBody Produto produto) {
         return produtoService.cadastrarProduto(produto);
