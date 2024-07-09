@@ -1,7 +1,9 @@
 package com.arthursimoes.apirestful;
 
+import com.arthursimoes.apirestful.model.Carrinho;
 import com.arthursimoes.apirestful.model.Categoria;
 import com.arthursimoes.apirestful.model.Usuario;
+import com.arthursimoes.apirestful.repository.CarrinhoRepository;
 import com.arthursimoes.apirestful.repository.ProdutoRepository;
 import com.arthursimoes.apirestful.model.Produto;
 import com.arthursimoes.apirestful.repository.CategoriaRepository;
@@ -25,6 +27,9 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+
+	@Autowired
+	private CarrinhoRepository carrinhoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiResTfulV1Application.class, args);

@@ -1,12 +1,11 @@
-// src/main/java/com/arthursimoes/apirestful/model/Carrinho.java
 package com.arthursimoes.apirestful.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 @ToString
 @Getter
@@ -18,12 +17,9 @@ public class Carrinho {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ElementCollection
-    private Map<Produto, Integer> produtos = new HashMap<>();
+    private int quantidade;
 
-    public BigDecimal calcularTotal() {
-        return produtos.entrySet().stream()
-                .map(entry -> entry.getKey().getPreco().multiply(BigDecimal.valueOf(entry.getValue())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
+    @OneToOne
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
 }

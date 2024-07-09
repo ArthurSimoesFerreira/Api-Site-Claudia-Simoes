@@ -1,4 +1,3 @@
-// src/main/java/com/arthursimoes/apirestful/controller/CarrinhoController.java
 package com.arthursimoes.apirestful.controller;
 
 import com.arthursimoes.apirestful.model.Carrinho;
@@ -6,29 +5,38 @@ import com.arthursimoes.apirestful.service.CarrinhoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@CrossOrigin("http://localhost:5173")
 @RestController
-@RequestMapping("/api/carrinho")
+@RequestMapping("carrinho")
 public class CarrinhoController {
+
     @Autowired
     private CarrinhoService carrinhoService;
 
-    @PostMapping("/{carrinhoId}/adicionar/{produtoId}")
-    public Carrinho adicionarProduto(@PathVariable Long carrinhoId, @PathVariable Long produtoId, @RequestParam int quantidade) {
-        return carrinhoService.adicionarProduto(carrinhoId, produtoId, quantidade);
+    @PostMapping("/adicionar/{produtoId}")
+    public Carrinho adicionarProduto(@PathVariable Long produtoId, @RequestParam int quantidade) {
+        return carrinhoService.adicionarProduto(produtoId, quantidade);
     }
 
-    @PostMapping("/{carrinhoId}/remover/{produtoId}")
-    public Carrinho removerProduto(@PathVariable Long carrinhoId, @PathVariable Long produtoId) {
-        return carrinhoService.removerProduto(carrinhoId, produtoId);
+    @PutMapping("/diminuir/{produtoId}")
+    public Carrinho diminuirQuantidadeProduto(@PathVariable Long produtoId) {
+        return carrinhoService.diminuirQuantidadeProduto(produtoId);
     }
 
-    @GetMapping("/{carrinhoId}")
-    public Carrinho obterCarrinho(@PathVariable Long carrinhoId) {
-        return carrinhoService.obterCarrinho(carrinhoId);
+    @DeleteMapping("/remover/{produtoId}")
+    public void removerProduto(@PathVariable Long produtoId) {
+        carrinhoService.removerProduto(produtoId);
     }
 
-    @PostMapping("/{carrinhoId}/finalizar")
-    public void finalizarCompra(@PathVariable Long carrinhoId) {
-        carrinhoService.finalizarCompra(carrinhoId);
+    @GetMapping
+    public List<Carrinho> obterCarrinho() {
+        return carrinhoService.obterCarrinho();
+    }
+
+    @PostMapping("/finalizar")
+    public void finalizarCompra() {
+        carrinhoService.finalizarCompra();
     }
 }

@@ -1,4 +1,3 @@
-// src/main/java/com/arthursimoes/apirestful/service/CarrinhoService.java
 package com.arthursimoes.apirestful.service;
 
 import com.arthursimoes.apirestful.model.Carrinho;
@@ -8,49 +7,54 @@ import com.arthursimoes.apirestful.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class CarrinhoService {
+
     @Autowired
     private CarrinhoRepository carrinhoRepository;
 
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public Carrinho adicionarProduto(Long carrinhoId, Long produtoId, int quantidade) {
-        Optional<Carrinho> carrinhoOpt = carrinhoRepository.findById(carrinhoId);
-        Optional<Produto> produtoOpt = produtoRepository.findById(produtoId);
+    public Carrinho adicionarProduto(Long produtoId, int quantidade) {
+        Produto produto = produtoRepository.findById(produtoId)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
-        if (carrinhoOpt.isPresent() && produtoOpt.isPresent()) {
-            Carrinho carrinho = carrinhoOpt.get();
-            Produto produto = produtoOpt.get();
-            carrinho.getProdutos().put(produto, carrinho.getProdutos().getOrDefault(produto, 0) + quantidade);
+        Carrinho carrinho = carrinhoRepository.findByProdutoId(produtoId).stream().findFirst()
+                .orElse(new Carrinho());
+
+        carrinho.setProduto(produto);
+        carrinho.setQuantidade(carrinho.getQuantidade() + quantidade);
+
+        return carrinhoRepository.save(carrinho);
+    }
+
+    public Carrinho diminuirQuantidadeProduto(Long produtoId) {
+        Carrinho carrinho = carrinhoRepository.findByProdutoId(produtoId).stream().findFirst()
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado no carrinho"));
+
+        if (carrinho.getQuantidade() > 1) {
+            carrinho.setQuantidade(carrinho.getQuantidade() - 1);
             return carrinhoRepository.save(carrinho);
         } else {
-            throw new RuntimeException("Carrinho ou Produto não encontrado");
+            carrinhoRepository.delete(carrinho);
+            return null;
         }
     }
 
-    public Carrinho removerProduto(Long carrinhoId, Long produtoId) {
-        Optional<Carrinho> carrinhoOpt = carrinhoRepository.findById(carrinhoId);
-        Optional<Produto> produtoOpt = produtoRepository.findById(produtoId);
-
-        if (carrinhoOpt.isPresent() && produtoOpt.isPresent()) {
-            Carrinho carrinho = carrinhoOpt.get();
-            Produto produto = produtoOpt.get();
-            carrinho.getProdutos().remove(produto);
-            return carrinhoRepository.save(carrinho);
-        } else {
-            throw new RuntimeException("Carrinho ou Produto não encontrado");
-        }
+    public void removerProduto(Long produtoId) {
+        Carrinho carrinho = carrinhoRepository.findByProdutoId(produtoId).stream().findFirst()
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado no carrinho"));
+        carrinhoRepository.delete(carrinho);
     }
 
-    public Carrinho obterCarrinho(Long carrinhoId) {
-        return carrinhoRepository.findById(carrinhoId).orElseThrow(() -> new RuntimeException("Carrinho não encontrado"));
+    public List<Carrinho> obterCarrinho() {
+        return carrinhoRepository.findAll();
     }
 
-    public void finalizarCompra(Long carrinhoId) {
-        carrinhoRepository.deleteById(carrinhoId);
+    public void finalizarCompra() {
+        carrinhoRepository.deleteAll();
     }
 }
