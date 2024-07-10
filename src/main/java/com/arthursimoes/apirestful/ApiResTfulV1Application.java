@@ -138,8 +138,8 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 
 		produto = new Produto(
 				"camisa_manga.png",
-				"Camisa com Manga Comprida",
-				"Camisa de manga comprida com tecido respirável",
+				"Camisa com Manga",
+				"Camisa de manga comprida",
 				true,
 				600,
 				BigDecimal.valueOf(59.99),
