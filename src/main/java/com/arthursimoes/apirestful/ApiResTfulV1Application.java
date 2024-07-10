@@ -28,8 +28,6 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-	@Autowired
-	private CarrinhoRepository carrinhoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiResTfulV1Application.class, args);
@@ -41,13 +39,13 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 		Usuario usuario = new Usuario("admin", "12345");
 		usuarioRepository.save(usuario);
 
-		Categoria camisa = new Categoria("Camisa");
+		Categoria camisa = new Categoria("Camisa", "camisa");
 		categoriaRepository.save(camisa);
 
-		Categoria legging = new Categoria("Legging");
+		Categoria legging = new Categoria("Legging", "legging");
 		categoriaRepository.save(legging);
 
-		Categoria top = new Categoria("Top");
+		Categoria top = new Categoria("Top", "top");
 		categoriaRepository.save(top);
 
 		Produto produto = new Produto(

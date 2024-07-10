@@ -87,4 +87,7 @@ public class ProdutoService {
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Produto número " + id + " não encontrado."));
     }
 
+    public List<Produto> recuperarProdutosPorSlugDaCategoria(String slug) {
+        return produtoRepository.findByCategoriaSlug(slug);
+    }
 }

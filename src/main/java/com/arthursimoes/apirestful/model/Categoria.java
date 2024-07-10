@@ -18,12 +18,14 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private String slug;
     @JsonIgnore
     @OneToMany (mappedBy = "categoria")
     private List<Produto> produtos;
 
-    public Categoria(String nome) {
+    public Categoria(String nome, String slug) {
         this.nome = nome;
+        this.slug = slug;
         this.produtos = new ArrayList<>();
     }
 }

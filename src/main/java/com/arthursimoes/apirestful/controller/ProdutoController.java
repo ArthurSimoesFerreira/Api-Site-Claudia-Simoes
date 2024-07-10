@@ -71,9 +71,7 @@ public class ProdutoController {
 
         Sort sort = ordenacaoDirecao.equalsIgnoreCase("asc") ? Sort.by(ordenacaoCampo).ascending() : Sort.by(ordenacaoCampo).descending();
         Pageable pageable = PageRequest.of(pagina, tamanho, sort);
-        System.out.println(pageable);
         Page<Produto> page = produtoService.recuperarProdutosComPaginacao(nome, pageable);
-        System.out.println(page);
         ResultadoPaginado<Produto> resultadoPaginado = new ResultadoPaginado<>(
                 page.getTotalElements(),
                 page.getTotalPages(),
@@ -81,5 +79,11 @@ public class ProdutoController {
                 page.getContent());
         System.out.println(resultadoPaginado.itens());
         return resultadoPaginado;
+    }
+
+    // localhost:8080/produtos/slugCategoria/frutas
+    @GetMapping("slugCategoria/{slug}")
+    public List<Produto> recuperarProdutosPorSlugDaCategoria(@PathVariable("slug") String slug) {
+        return produtoService.recuperarProdutosPorSlugDaCategoria(slug);
     }
 }
