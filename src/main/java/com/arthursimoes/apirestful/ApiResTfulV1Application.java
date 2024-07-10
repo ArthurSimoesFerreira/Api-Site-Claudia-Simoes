@@ -223,5 +223,49 @@ public class ApiResTfulV1Application implements CommandLineRunner {
 				LocalDate.of(2024, 2, 11),
 				top);
 		produtoRepository.save(produto);
+
+		produto = new Produto(
+				"camisa_rosa.png",
+				"Camisa Rosa",
+				"Camisa Rosa de ginástica super confortável e com tecido leve",
+				true,
+				6,
+				BigDecimal.valueOf(109.99),
+				LocalDate.of(2023, 1, 11),
+				camisa);
+		produtoRepository.save(produto);
+
+		produto = new Produto(
+				"camisa_roxa.png",
+				"Camisa Roxa",
+				"Camisa Rosa de ginástica leve com tecido com proteção UV",
+				true,
+				9,
+				BigDecimal.valueOf(179.99),
+				LocalDate.of(2023, 1, 16),
+				camisa);
+		produtoRepository.save(produto);
+
+		produto = new Produto(
+				"legging_preta.png",
+				"Legging Preta",
+				"Legging Preta de ginástica com tecido alongável e bolsos laterais",
+				true,
+				9,
+				BigDecimal.valueOf(139.99),
+				LocalDate.of(2024, 9, 9),
+				legging);
+		produtoRepository.save(produto);
+
+		produto = new Produto(
+				"top_branco.png",
+				"Top Branco",
+				"Top Branco bem ajustado, super confortável, e feito para ginástica",
+				true,
+				12,
+				BigDecimal.valueOf(129.99),
+				LocalDate.of(2024, 9, 14),
+				top);
+		produtoRepository.save(produto);
 	}
 }
