@@ -44,4 +44,24 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     @Query("select p from Produto p left outer join fetch p.categoria c where c.slug = :slug")
     List<Produto> findByCategoriaSlug(String slug);
+
+    @Query(
+            value = "select p from Produto p " +
+                    "left outer join fetch p.categoria c " +
+                    "where c.slug = :slug " +
+                    "order by p.nome",
+            countQuery = "select count(p) " +
+                    "from Produto p " +
+                    "left outer join p.categoria c " +
+                    "where c.slug = :slug  "
+    )
+    Page<Produto> recuperarProdutosPaginadosPorSlugDaCategoria(String slug, Pageable pageable);
+
+    @Query(
+            value = "select p from Produto p " +
+                    "left outer join fetch p.categoria c " +
+                    "order by p.nome",
+            countQuery = "select count(p) from Produto p "
+    )
+    Page<Produto> recuperarProdutosPaginados(Pageable pageable);
 }

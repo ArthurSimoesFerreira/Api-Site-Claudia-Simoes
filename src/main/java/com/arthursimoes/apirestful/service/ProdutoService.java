@@ -90,4 +90,13 @@ public class ProdutoService {
     public List<Produto> recuperarProdutosPorSlugDaCategoria(String slug) {
         return produtoRepository.findByCategoriaSlug(slug);
     }
+
+    public Page<Produto> recuperarProdutosPaginadosPorSlugDaCategoria(String slug, Pageable pageable) {
+        if(!slug.isEmpty()) {
+            return produtoRepository.recuperarProdutosPaginadosPorSlugDaCategoria(slug, pageable);
+        }
+        else {
+            return produtoRepository.recuperarProdutosPaginados(pageable);
+        }
+    }
 }

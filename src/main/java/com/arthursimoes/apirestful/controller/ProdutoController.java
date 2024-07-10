@@ -86,4 +86,20 @@ public class ProdutoController {
     public List<Produto> recuperarProdutosPorSlugDaCategoria(@PathVariable("slug") String slug) {
         return produtoService.recuperarProdutosPorSlugDaCategoria(slug);
     }
+
+    // http://localhost:8080/produtos/categoria/paginacao?pagina=0&tamanho=6&slug=frutas
+    @GetMapping("categoria/paginacao")
+    public ResultadoPaginado<Produto> recuperarProdutosPaginadosPorSlugDaCategoria(
+            @RequestParam(value = "pagina", defaultValue = "0") int pagina,
+            @RequestParam(value = "tamanho", defaultValue = "3") int tamanho,
+            @RequestParam(value = "slug", defaultValue = "") String slug) {
+        Pageable pageable = PageRequest.of(pagina, tamanho);
+        Page<Produto> page = produtoService.recuperarProdutosPaginadosPorSlugDaCategoria(slug, pageable);
+        ResultadoPaginado<Produto> resultadoPaginado = new ResultadoPaginado<>(
+                page.getTotalElements(),
+                page.getTotalPages(),
+                page.getNumber(),
+                page.getContent());
+        return resultadoPaginado;
+    }
 }
